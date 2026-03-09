@@ -41,16 +41,50 @@ export class CortexSettingTab extends PluginSettingTab {
 					})
 			);
 
-		new Setting(containerEl)
-			.setName("Claude Code setup")
-			.setDesc("Copy the command to register Cortex with Claude Code")
-			.addButton((button) =>
-				button.setButtonText("Copy /mcp add command").onClick(() => {
-					const cmd = `/mcp add cortex --transport http --url http://127.0.0.1:${this.plugin.settings.port}/mcp`;
-					navigator.clipboard.writeText(cmd);
-					button.setButtonText("Copied!");
-					setTimeout(() => button.setButtonText("Copy /mcp add command"), 2000);
-				})
-			);
+		const mcpUrl = `http://127.0.0.1:${this.plugin.settings.port}/mcp`;
+
+		const addCopyButton = (
+			name: string,
+			desc: string,
+			label: string,
+			getText: () => string
+		) => {
+			new Setting(containerEl)
+				.setName(name)
+				.setDesc(desc)
+				.addButton((button) =>
+					button.setButtonText(label).onClick(() => {
+						navigator.clipboard.writeText(getText());
+						button.setButtonText("Copied!");
+						setTimeout(() => button.setButtonText(label), 2000);
+					})
+				);
+		};
+
+		addCopyButton(
+			"Claude Code setup",
+			"Copy the command to register Cortex with Claude Code",
+			"Copy /mcp add command",
+			() => `/mcp add cortex --transport http --url ${mcpUrl}`
+		);
+
+		addCopyButton(
+			"Codex setup",
+			"Copy the command to register Cortex with Codex CLI",
+			"Copy codex mcp add command",
+			() => `codex mcp add cortex --url ${mcpUrl}`
+		);
+
+		addCopyButton(
+			"OpenCode setup",
+			"Copy the JSON config to add to the mcp section of opencode.json",
+			"Copy JSON config",
+			() =>
+				JSON.stringify(
+					{ cortex: { type: "remote", url: mcpUrl } },
+					null,
+					2
+				)
+		);
 	}
 }
