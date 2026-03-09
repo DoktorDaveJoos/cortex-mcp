@@ -104,6 +104,14 @@ Open **Settings → Cortex** to configure:
 - **Client can't connect** — Make sure Obsidian is open and the server is running (check the status bar icon).
 - **Changed the port** — Update the URL in your client config to match the new port.
 
+## Support
+
+If Cortex is useful to you, consider supporting its development.
+
+<a href="https://buymeacoffee.com/davidjoos">
+  <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="48">
+</a>
+
 ## Security
 
 - Binds to `127.0.0.1` only — no remote access by default
@@ -118,6 +126,3 @@ npm run build
 
 Copy `main.js` and `manifest.json` into your vault at `.obsidian/plugins/cortex/`.
 
-## Support
-
-<a href="https://buymeacoffee.com/davidjoos"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=davidjoos&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
