@@ -10,6 +10,25 @@
 
 ---
 
+## ✦ Meet Cortex — AI Native Notes
+
+<p align="center">
+  <img src="assets/cortex-app.png" alt="Cortex app screenshot" width="660" style="border-radius: 8px;" />
+</p>
+
+A free, native desktop app for notes that actually work with your AI tools. No cloud, no subscription, no data mining — everything stays on your machine.
+
+- **Free forever** — no trials, no paywalls
+- **Offline-first** — your notes live on your filesystem, period
+- **AI when you want it** — bring your own keys, 10+ providers, fully optional
+- **Built for builders** — rich editor, version history, notebooks, tags, vector search
+
+**[Get Cortex — it's free →](https://get-cortex.app)**
+
+---
+
+*Already using Obsidian? This plugin brings the same AI-native philosophy to your vault. ↓*
+
 ## What it does
 
 Cortex runs a local [MCP](https://modelcontextprotocol.io) server inside Obsidian, exposing 9 tools for reading, writing, searching, and organizing notes. Any MCP-compatible client — Claude Code, Codex, OpenCode — can connect over HTTP and work with your vault.
@@ -80,8 +99,3 @@ npm run build
 
 Copy `main.js`, `manifest.json`, and `styles.css` into your vault at `.obsidian/plugins/cortex/`.
 
-## Cortex — AI Native Notes
-
-> *Your notes should be as accessible to your AI as they are to you.*
-
-No copy-paste, no export, no context-window gymnastics — just connect and go. Cortex turns your Obsidian vault into a live resource your AI tools can read, search, and write to while you work. Built for the workflow where coding and thinking happen together. Your second brain, now actually connected to your first.
