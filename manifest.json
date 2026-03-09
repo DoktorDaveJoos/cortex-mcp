@@ -1,0 +1,9 @@
+{
+	"id": "cortex",
+	"name": "Cortex",
+	"version": "1.0.0",
+	"minAppVersion": "1.5.0",
+	"description": "MCP server that lets Claude Code and Codex read/write notes in your vault over HTTP.",
+	"author": "David",
+	"isDesktopOnly": true
+}
