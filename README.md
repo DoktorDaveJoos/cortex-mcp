@@ -5,14 +5,14 @@
 <h1 align="center">Cortex</h1>
 
 <p align="center">
-  Give your AI coding tools access to your Obsidian vault.
+  Your Obsidian vault, available to your AI coding tools — read, write, search, and organize notes from Claude Code, Codex, or OpenCode.
 </p>
 
 ---
 
 ## What it does
 
-Cortex runs a local [MCP](https://modelcontextprotocol.io) server inside Obsidian, exposing 9 tools for reading, writing, searching, and organizing notes. Any MCP-compatible client — Claude Code, Codex, OpenCode — can connect over HTTP and work with your vault.
+Cortex lets AI coding tools work directly with your Obsidian notes. It runs a local [MCP](https://modelcontextprotocol.io) server inside Obsidian that any compatible client can connect to over HTTP — no cloud services, no syncing, no config files to wrestle with.
 
 ## Quick start
 
@@ -51,6 +51,17 @@ Add to your `opencode.json`:
 }
 ```
 
+4. **Verify**: ask your AI tool to run `list_folders` — if it returns your vault's folder structure, you're connected.
+
+## Example usage
+
+Once connected, just ask your AI tool in natural language:
+
+- "Summarize my meeting notes from this week"
+- "Create a note in Projects/my-app with today's architecture decisions"
+- "Search my vault for everything about authentication"
+- "List all tags I've used and how often"
+
 ## Available tools
 
 | Tool | Description |
@@ -65,6 +76,21 @@ Add to your `opencode.json`:
 | `list_tags` | List all tags in the vault with their frequency |
 | `list_folders` | List folders in the vault |
 
+## Connecting a project
+
+You can tell your AI tool which Obsidian folder maps to the current project. This way, when it creates or looks for notes, it knows where to put them.
+
+Add a snippet to your project root:
+
+**`CLAUDE.md`** (Claude Code) or **`AGENTS.md`** (Codex, OpenCode):
+
+```markdown
+## Cortex
+- Cortex folder for this project: `Projects/my-app`
+```
+
+Replace `Projects/my-app` with your vault folder path. OpenCode checks `AGENTS.md` first, then falls back to `CLAUDE.md`.
+
 ## Configuration
 
 Open **Settings → Cortex** to configure:
@@ -72,25 +98,11 @@ Open **Settings → Cortex** to configure:
 - **Port** — HTTP port for the MCP server (default `27182`, requires restart)
 - **Auto-start** — Start the server when Obsidian launches (default on)
 
-## Project snippets
+## Troubleshooting
 
-To tell your AI tool which Obsidian folder to use for a project, add a snippet to the project root:
-
-**`CLAUDE.md`** (Claude Code):
-
-```markdown
-## Cortex
-- Cortex folder for this project: `<your-folder>`
-```
-
-**`AGENTS.md`** (Codex, OpenCode):
-
-```markdown
-## Cortex
-- Cortex folder for this project: `<your-folder>`
-```
-
-Replace `<your-folder>` with the vault folder path (e.g. `Projects/my-app`). OpenCode checks `AGENTS.md` first, then falls back to `CLAUDE.md`.
+- **Server not starting** — Check if port `27182` is already in use. Change the port in settings if needed.
+- **Client can't connect** — Make sure Obsidian is open and the server is running (check the status bar icon).
+- **Changed the port** — Update the URL in your client config to match the new port.
 
 ## Security
 
