@@ -8,6 +8,13 @@
   Your Obsidian vault, available to your AI coding tools — read, write, search, and organize notes from Claude Code, Codex, or OpenCode.
 </p>
 
+<p align="center">
+  <a href="https://github.com/DoktorDaveJoos/cortex-mcp/actions"><img src="https://img.shields.io/github/actions/workflow/status/DoktorDaveJoos/cortex-mcp/test.yml?label=tests" alt="Tests"></a>
+  <a href="https://github.com/DoktorDaveJoos/cortex-mcp/releases/latest"><img src="https://img.shields.io/github/v/release/DoktorDaveJoos/cortex-mcp" alt="Release"></a>
+  <a href="https://github.com/DoktorDaveJoos/cortex-mcp/blob/main/LICENSE"><img src="https://img.shields.io/github/license/DoktorDaveJoos/cortex-mcp" alt="License"></a>
+  <a href="https://obsidian.md/plugins?id=cortex"><img src="https://img.shields.io/badge/Obsidian-plugin-7C3AED?logo=obsidian" alt="Obsidian Plugin"></a>
+</p>
+
 ---
 
 ## What it does
