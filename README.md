@@ -79,3 +79,9 @@ npm run build
 ```
 
 Copy `main.js`, `manifest.json`, and `styles.css` into your vault at `.obsidian/plugins/cortex/`.
+
+## Cortex — AI Native Notes
+
+> *Your notes should be as accessible to your AI as they are to you.*
+
+No copy-paste, no export, no context-window gymnastics — just connect and go. Cortex turns your Obsidian vault into a live resource your AI tools can read, search, and write to while you work. Built for the workflow where coding and thinking happen together. Your second brain, now actually connected to your first.
