@@ -3,7 +3,7 @@
 	"name": "Cortex",
 	"version": "1.0.0",
 	"minAppVersion": "1.5.0",
-	"description": "MCP server that lets Claude Code and Codex read/write notes in your vault over HTTP.",
+	"description": "MCP server that lets AI coding tools (Claude Code, Codex, OpenCode) read, write, and search notes in your vault over HTTP.",
 	"author": "David",
 	"isDesktopOnly": true
 }
