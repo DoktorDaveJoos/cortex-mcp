@@ -23,24 +23,30 @@ Cortex runs a local [MCP](https://modelcontextprotocol.io) server inside Obsidia
 ### Claude Code
 
 ```sh
-claude mcp add cortex --transport http --url http://127.0.0.1:27182/mcp
+claude mcp add --transport http cortex http://127.0.0.1:27182/mcp
 ```
 
 ### Codex
 
-```sh
-codex mcp add cortex --url http://127.0.0.1:27182/mcp
+Add to `.codex/config.toml` in your project (or `~/.codex/config.toml` for global):
+
+```toml
+[mcp_servers.cortex]
+type = "remote"
+url = "http://127.0.0.1:27182/mcp"
 ```
 
 ### OpenCode
 
-Add to the `mcp` section of your `opencode.json`:
+Add to your `opencode.json`:
 
 ```json
 {
-  "cortex": {
-    "type": "remote",
-    "url": "http://127.0.0.1:27182/mcp"
+  "mcp": {
+    "cortex": {
+      "type": "remote",
+      "url": "http://127.0.0.1:27182/mcp"
+    }
   }
 }
 ```
@@ -66,6 +72,26 @@ Open **Settings → Cortex** to configure:
 - **Port** — HTTP port for the MCP server (default `27182`, requires restart)
 - **Auto-start** — Start the server when Obsidian launches (default on)
 
+## Project snippets
+
+To tell your AI tool which Obsidian folder to use for a project, add a snippet to the project root:
+
+**`CLAUDE.md`** (Claude Code):
+
+```markdown
+## Cortex
+- Cortex folder for this project: `<your-folder>`
+```
+
+**`AGENTS.md`** (Codex, OpenCode):
+
+```markdown
+## Cortex
+- Cortex folder for this project: `<your-folder>`
+```
+
+Replace `<your-folder>` with the vault folder path (e.g. `Projects/my-app`). OpenCode checks `AGENTS.md` first, then falls back to `CLAUDE.md`.
+
 ## Security
 
 - Binds to `127.0.0.1` only — no remote access by default
@@ -80,3 +106,6 @@ npm run build
 
 Copy `main.js` and `manifest.json` into your vault at `.obsidian/plugins/cortex/`.
 
+## Support
+
+<a href="https://buymeacoffee.com/davidjoos"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=davidjoos&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>

@@ -70,18 +70,19 @@ export class CortexSettingTab extends PluginSettingTab {
 
 		addCopyButton(
 			"Codex setup",
-			"Copy the command to register Cortex with Codex CLI",
-			"Copy codex mcp add command",
-			() => `codex mcp add cortex --url ${mcpUrl}`
+			"Copy the TOML config to add to .codex/config.toml",
+			"Copy TOML config",
+			() =>
+				`[mcp_servers.cortex]\ntype = "remote"\nurl = "${mcpUrl}"`
 		);
 
 		addCopyButton(
 			"OpenCode setup",
-			"Copy the JSON config to add to the mcp section of opencode.json",
+			"Copy the JSON config to add to opencode.json",
 			"Copy JSON config",
 			() =>
 				JSON.stringify(
-					{ cortex: { type: "remote", url: mcpUrl } },
+					{ mcp: { cortex: { type: "remote", url: mcpUrl } } },
 					null,
 					2
 				)
