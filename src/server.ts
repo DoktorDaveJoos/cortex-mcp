@@ -56,7 +56,7 @@ export class CortexServer {
 
 				this.sweepInterval = setInterval(() => this.sweepSessions(), SESSION_TTL_MS / 2);
 
-				console.log(`Cortex MCP server listening on 127.0.0.1:${this.port}`);
+				console.debug(`Cortex MCP server listening on 127.0.0.1:${this.port}`);
 				resolve();
 			});
 		});
@@ -80,7 +80,7 @@ export class CortexServer {
 			}
 			this.httpServer.close(() => {
 				this.httpServer = null;
-				console.log("Cortex MCP server stopped");
+				console.debug("Cortex MCP server stopped");
 				resolve();
 			});
 		});
@@ -94,7 +94,7 @@ export class CortexServer {
 		const now = Date.now();
 		for (const [id, entry] of this.sessions) {
 			if (now - entry.lastActivity > SESSION_TTL_MS) {
-				entry.transport.close();
+				void entry.transport.close();
 				this.sessions.delete(id);
 			}
 		}

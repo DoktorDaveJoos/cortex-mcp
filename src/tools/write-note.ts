@@ -10,23 +10,21 @@ async function ensureFolder(app: App, folderPath: string) {
 }
 
 export function registerWriteNote(server: McpServer, app: App) {
-	server.tool(
-		"write_note",
-		"Create or overwrite a note at the given path",
-		{
+	server.registerTool("write_note", {
+		description: "Create or overwrite a note at the given path",
+		inputSchema: {
 			path: z.string().describe("Path to the note (e.g. 'folder/note.md')"),
 			content: z.string().describe("Full content to write"),
 		},
-		async ({ path, content }) => {
-			const file = app.vault.getAbstractFileByPath(path);
-			if (file instanceof TFile) {
-				await app.vault.modify(file, content);
-				return { content: [{ type: "text", text: `Updated: ${path}` }] };
-			}
-			const folder = path.contains("/") ? path.slice(0, path.lastIndexOf("/")) : "";
-			if (folder) await ensureFolder(app, folder);
-			await app.vault.create(path, content);
-			return { content: [{ type: "text", text: `Created: ${path}` }] };
+	}, async ({ path, content }) => {
+		const file = app.vault.getAbstractFileByPath(path);
+		if (file instanceof TFile) {
+			await app.vault.modify(file, content);
+			return { content: [{ type: "text", text: `Updated: ${path}` }] };
 		}
-	);
+		const folder = path.contains("/") ? path.slice(0, path.lastIndexOf("/")) : "";
+		if (folder) await ensureFolder(app, folder);
+		await app.vault.create(path, content);
+		return { content: [{ type: "text", text: `Created: ${path}` }] };
+	});
 }

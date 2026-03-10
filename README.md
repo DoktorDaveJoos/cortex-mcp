@@ -30,7 +30,7 @@ Cortex lets AI coding tools work directly with your Obsidian notes. It runs a lo
 ### Claude Code
 
 ```sh
-claude mcp add --transport http cortex http://127.0.0.1:27182/mcp
+claude mcp add -s user --transport http cortex http://127.0.0.1:27182/mcp
 ```
 
 ### Codex

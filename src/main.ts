@@ -17,13 +17,13 @@ export default class CortexPlugin extends Plugin {
 
 		this.addCommand({
 			id: "start-server",
-			name: "Start MCP server",
+			name: "Start server",
 			callback: () => this.startServer(),
 		});
 
 		this.addCommand({
 			id: "stop-server",
-			name: "Stop MCP server",
+			name: "Stop server",
 			callback: () => this.stopServer(),
 		});
 
@@ -32,13 +32,13 @@ export default class CortexPlugin extends Plugin {
 		}
 	}
 
-	async onunload() {
-		await this.stopServer();
+	onunload() {
+		void this.stopServer();
 	}
 
 	async startServer() {
 		if (this.server?.isRunning) {
-			new Notice("Cortex MCP server is already running");
+			new Notice("Cortex server is already running");
 			return;
 		}
 

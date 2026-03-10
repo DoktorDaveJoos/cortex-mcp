@@ -176,5 +176,15 @@ export function createMockApp(config: MockAppConfig = {}): any {
 		},
 	};
 
-	return { vault, metadataCache };
+	const fileManager = {
+		async trashFile(file: TFile): Promise<void> {
+			fileContents.delete(file.path);
+			fileMap.delete(file.path);
+			if (file.parent) {
+				file.parent.children = file.parent.children.filter((c) => c !== file);
+			}
+		},
+	};
+
+	return { vault, metadataCache, fileManager };
 }

@@ -15,7 +15,7 @@ export class CortexSettingTab extends PluginSettingTab {
 
 		new Setting(containerEl)
 			.setName("Port")
-			.setDesc("HTTP port for the MCP server (requires restart)")
+			.setDesc("Server port (requires restart)")
 			.addText((text) =>
 				text
 					.setPlaceholder("27182")
@@ -31,7 +31,7 @@ export class CortexSettingTab extends PluginSettingTab {
 
 		new Setting(containerEl)
 			.setName("Auto-start")
-			.setDesc("Start the MCP server automatically when Obsidian launches")
+			.setDesc("Start the server automatically when Obsidian launches")
 			.addToggle((toggle) =>
 				toggle
 					.setValue(this.plugin.settings.autoStart)
@@ -54,9 +54,9 @@ export class CortexSettingTab extends PluginSettingTab {
 				.setDesc(desc)
 				.addButton((button) =>
 					button.setButtonText(label).onClick(() => {
-						navigator.clipboard.writeText(getText());
+						void navigator.clipboard.writeText(getText());
 						button.setButtonText("Copied!");
-						setTimeout(() => button.setButtonText(label), 2000);
+						setTimeout(() => { button.setButtonText(label); }, 2000);
 					})
 				);
 		};

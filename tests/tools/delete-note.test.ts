@@ -19,19 +19,16 @@ describe("delete_note", () => {
 		registerDeleteNote(server as any, app);
 	});
 
-	it("soft delete (default): calls vault.trash", async () => {
-		const trashSpy = vi.spyOn(app.vault, "trash");
+	it("calls fileManager.trashFile", async () => {
+		const trashSpy = vi.spyOn(app.fileManager, "trashFile");
 		const result = await server.callTool("delete_note", { path: "to-trash.md" });
 		expect(trashSpy).toHaveBeenCalled();
-		expect(result.content[0].text).toContain("trashed");
+		expect(result.content[0].text).toContain("Deleted");
 		expect(app.vault.getAbstractFileByPath("to-trash.md")).toBeNull();
 	});
 
-	it("permanent delete: calls vault.delete", async () => {
-		const deleteSpy = vi.spyOn(app.vault, "delete");
-		const result = await server.callTool("delete_note", { path: "to-delete.md", permanent: true });
-		expect(deleteSpy).toHaveBeenCalled();
-		expect(result.content[0].text).toContain("permanent");
+	it("removes file from vault", async () => {
+		await server.callTool("delete_note", { path: "to-delete.md" });
 		expect(app.vault.getAbstractFileByPath("to-delete.md")).toBeNull();
 	});
 
@@ -40,9 +37,8 @@ describe("delete_note", () => {
 		expect(result.isError).toBe(true);
 	});
 
-	it("response text differs for trash vs permanent", async () => {
-		const r1 = await server.callTool("delete_note", { path: "to-trash.md" });
-		expect(r1.content[0].text).toContain("trashed");
-		expect(r1.content[0].text).not.toContain("permanent");
+	it("response includes path", async () => {
+		const result = await server.callTool("delete_note", { path: "to-trash.md" });
+		expect(result.content[0].text).toContain("to-trash.md");
 	});
 });
