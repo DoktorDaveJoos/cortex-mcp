@@ -1,6 +1,6 @@
 {
 	"name": "cortex-plugin",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"private": true,
 	"license": "MIT",
 	"description": "Obsidian MCP server plugin for Claude Code, Codex, and OpenCode",

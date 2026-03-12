@@ -164,7 +164,7 @@ export class CortexServer {
 			await mcpServer.connect(transport);
 			await transport.handleRequest(req, res, parsed);
 		} else if (sessionId) {
-			res.writeHead(400, { "Content-Type": "application/json" });
+			res.writeHead(404, { "Content-Type": "application/json" });
 			res.end(
 				JSON.stringify({
 					jsonrpc: "2.0",
@@ -187,7 +187,7 @@ export class CortexServer {
 	private async handleSessionRequest(req: IncomingMessage, res: ServerResponse) {
 		const sessionId = req.headers["mcp-session-id"] as string | undefined;
 		if (!sessionId || !this.sessions.has(sessionId)) {
-			res.writeHead(400, { "Content-Type": "application/json" });
+			res.writeHead(404, { "Content-Type": "application/json" });
 			res.end(JSON.stringify({ error: "Invalid or missing session ID" }));
 			return;
 		}

@@ -125,7 +125,7 @@ describe("CortexServer", () => {
 			expect(body).toContain("Missing session ID");
 		});
 
-		it("invalid session ID returns 400", async () => {
+		it("invalid session ID returns 404", async () => {
 			const { server, port } = createServer();
 			await server.start();
 
@@ -137,17 +137,17 @@ describe("CortexServer", () => {
 				},
 				body: JSON.stringify({ jsonrpc: "2.0", method: "tools/list", id: 1 }),
 			});
-			expect(res.status).toBe(400);
+			expect(res.status).toBe(404);
 			const body = await res.text();
 			expect(body).toContain("Invalid or expired session");
 		});
 
-		it("GET without session ID returns 400", async () => {
+		it("GET without session ID returns 404", async () => {
 			const { server, port } = createServer();
 			await server.start();
 
 			const res = await fetch(`http://127.0.0.1:${port}/mcp`, { method: "GET" });
-			expect(res.status).toBe(400);
+			expect(res.status).toBe(404);
 		});
 	});
 
